@@ -9,5 +9,5 @@ sentence-transformers==2.7.0
 scikit-learn==1.4.2
 numpy==1.26.4
 requests==2.31.0
-google-genai==0.1.1
+google-genai
 mongomock==4.1.2
