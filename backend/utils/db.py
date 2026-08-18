@@ -1,3 +1,4 @@
+import os
 import re
 import logging
 import certifi
@@ -19,6 +20,7 @@ def get_db():
     Returns the MongoDB database instance.
     Connects to MongoDB Atlas or configured MongoDB URI.
     """
+    MONGO_URI = os.environ.get("MONGO_URI")
     client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
     global _mongo_client, _db_instance, _is_mock
 
