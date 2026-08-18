@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary btn-sm">Sign In</a>
+        </div>
+      </div>
+    </header>
+
+    <main style="display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+      <div class="card" style="max-width: 480px; width: 100%; padding: 2.5rem;">
+        <div style="text-align: center; margin-bottom: 1.8rem;">
+          <h2 style="font-size: 1.8rem; margin-bottom: 0.4rem;">Create Account</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Join QuizGen AI to generate grounded quizzes in seconds.</p>
+        </div>
+
+        <form id="registerForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Full Name</label>
+            <input type="text" id="name" class="form-control" placeholder="Alex Morgan" required autocomplete="name">
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="alex@university.edu" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="At least 6 characters" required autocomplete="new-password">
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="Re-enter password" required autocomplete="new-password">
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.5rem;">
+            Create Account
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-muted);">
+          Already have an account? <a href="login.html" style="font-weight: 600;">Log in</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      requireGuest();
+
+      const form = document.getElementById('registerForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (password !== confirmPassword) {
+          showToast('Passwords do not match.', 'error');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Creating account...';
+
+        try {
+          await handleRegister(name, email, password, confirmPassword);
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Create Account';
+        }
+      };
+    });
+  </script>
+</body>
+</html>

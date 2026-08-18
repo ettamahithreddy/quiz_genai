@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taking Quiz — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body style="background: #f1f5f9;">
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="font-family: var(--font-mono); font-size: 1.05rem; font-weight: 700; background: var(--bg-alt); padding: 0.35rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);" id="timerDisplay">
+            ⏱️ 00:00
+          </div>
+          <button id="quitQuizBtn" class="btn btn-secondary btn-sm">Quit</button>
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 2rem 0 4rem;">
+      <div class="container container-narrow">
+        <!-- Quiz Header Info -->
+        <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <h2 id="quizTitle" style="font-size: 1.25rem; margin-bottom: 0.15rem;">Loading Quiz...</h2>
+              <span id="quizTopicBadge" style="font-size: 0.8rem; font-weight: 600; color: var(--primary); background: var(--primary-light); padding: 0.2rem 0.6rem; border-radius: var(--radius-full);">
+                Topic
+              </span>
+            </div>
+            <div id="questionCounter" style="font-size: 0.95rem; font-weight: 700; color: var(--text-muted);">
+              Question 1 of 10
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="quiz-progress-bar-container">
+            <div id="progressBarFill" class="quiz-progress-bar-fill" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- Question Box Card -->
+        <div class="card" style="padding: 2.2rem; min-height: 380px; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <!-- Question Type & Difficulty Tag -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+              <span id="questionTypeTag" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--secondary); background: var(--secondary-light); padding: 0.2rem 0.55rem; border-radius: var(--radius-sm);">
+                MCQ
+              </span>
+              <span id="questionDiffTag" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-muted); background: var(--bg-alt); padding: 0.2rem 0.55rem; border-radius: var(--radius-sm);">
+                Medium
+              </span>
+            </div>
+
+            <!-- Question Text -->
+            <h3 id="questionText" style="font-size: 1.3rem; line-height: 1.4; margin-bottom: 1.8rem; font-weight: 700;">
+              Loading question...
+            </h3>
+
+            <!-- Options Container -->
+            <div id="optionsContainer">
+              <!-- Rendered by quiz.js -->
+            </div>
+          </div>
+
+          <!-- Navigation / Submit Controls -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border-color);">
+            <button id="prevQuestionBtn" class="btn btn-secondary" disabled>
+              ← Previous
+            </button>
+            <div style="display: flex; gap: 0.8rem;">
+              <button id="nextQuestionBtn" class="btn btn-primary">
+                Next →
+              </button>
+              <button id="submitQuizBtn" class="btn btn-primary" style="display: none; background: var(--success); border-color: var(--success);">
+                ✓ Submit Quiz
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/quiz.js"></script>
+</body>
+</html>

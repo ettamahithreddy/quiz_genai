@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <div class="nav-actions">
+          <a href="register.html" class="btn btn-primary btn-sm">Create Account</a>
+        </div>
+      </div>
+    </header>
+
+    <main style="display: flex; align-items: center; justify-content: center; padding: 3rem 1.5rem;">
+      <div class="card" style="max-width: 440px; width: 100%; padding: 2.5rem;">
+        <div style="text-align: center; margin-bottom: 2rem;">
+          <h2 style="font-size: 1.8rem; margin-bottom: 0.4rem;">Welcome Back</h2>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">Log in to access your study materials and quizzes.</p>
+        </div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="student@example.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary btn-block btn-lg" style="margin-top: 1.5rem;">
+            Sign In
+          </button>
+        </form>
+
+        <div style="text-align: center; margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid var(--border-color); font-size: 0.9rem; color: var(--text-muted);">
+          Don't have an account yet? <a href="register.html" style="font-weight: 600;">Sign up</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      requireGuest();
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('session_expired')) {
+        showToast('Your session has expired. Please log in again.', 'info');
+      }
+
+      const form = document.getElementById('loginForm');
+      const submitBtn = document.getElementById('submitBtn');
+
+      form.onsubmit = async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Signing in...';
+
+        try {
+          await handleLogin(email, password);
+        } catch (err) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Sign In';
+        }
+      };
+    });
+  </script>
+</body>
+</html>

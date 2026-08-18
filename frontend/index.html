@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuizGen AI - Turn your study material into smart, source-grounded quizzes using Retrieval-Augmented Generation (RAG).">
+  <title>QuizGen AI — Smart Generative AI Quiz Generator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="index.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn-secondary btn-sm">Login</a>
+          <a href="register.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-badge">✨ RAG-Powered Source Grounded Generation</div>
+          <h1 class="hero-title">Turn Your Notes Into AI-Powered Quizzes</h1>
+          <p class="hero-description">
+            Upload PDFs, notes, articles or textbooks and generate personalized quizzes using Retrieval-Augmented Generation. Every question is grounded in your source material.
+          </p>
+          <div class="hero-actions">
+            <a href="generate.html" class="btn btn-primary btn-lg">⚡ Generate Quiz</a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg">How It Works</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="features-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Built For Deep Learning & Mastery</h2>
+            <p class="section-subtitle">QuizGen AI doesn't hallucinate random trivia. It extracts precision assessments from your exact syllabus.</p>
+          </div>
+
+          <div class="grid-4">
+            <div class="feature-card">
+              <div class="feature-icon-wrapper">⚡</div>
+              <h3>AI Quiz Generation</h3>
+              <p>Generate quizzes automatically from uploaded textbooks, research papers, and handwritten notes in seconds.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrapper">🎯</div>
+              <h3>RAG Powered</h3>
+              <p>Retrieve relevant information from supplied material before generating questions, ensuring zero hallucinations.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrapper">📝</div>
+              <h3>Multiple Question Types</h3>
+              <p>Test comprehensive mastery with Multiple Choice Questions (MCQ), True/False, and conceptual Short Answers.</p>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-icon-wrapper">💡</div>
+              <h3>Instant Explanations</h3>
+              <p>Understand why an answer is correct with detailed rationales and direct page-by-page textbook citations.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section id="how-it-works" style="padding: 4.5rem 0;">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">From raw study notes to mastery assessment in 4 simple steps.</p>
+          </div>
+
+          <div class="grid-4">
+            <div class="card card-hover" style="text-align: center;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">01</div>
+              <h3 style="margin-bottom: 0.5rem;">Upload</h3>
+              <p>Upload your PDF file, enter a topic, or paste lecture notes into the input studio.</p>
+            </div>
+
+            <div class="card card-hover" style="text-align: center;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">02</div>
+              <h3 style="margin-bottom: 0.5rem;">Understand</h3>
+              <p>The RAG system parses page texts, calculates embeddings, and semantically isolates key concepts.</p>
+            </div>
+
+            <div class="card card-hover" style="text-align: center;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">03</div>
+              <h3 style="margin-bottom: 0.5rem;">Generate</h3>
+              <p>Generative AI constructs targeted questions strictly backed by the retrieved context chunks.</p>
+            </div>
+
+            <div class="card card-hover" style="text-align: center;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">04</div>
+              <h3 style="margin-bottom: 0.5rem;">Practice</h3>
+              <p>Take the quiz, review exact source snippets, track weak topics, and study flashcards.</p>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 3.5rem;">
+            <a href="generate.html" class="btn btn-primary btn-lg">Get Started Now — It's Free</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" style="padding: 4rem 0; background: var(--bg-alt); border-top: 1px solid var(--border-color);">
+        <div class="container container-narrow" style="text-align: center;">
+          <h2 style="margin-bottom: 1rem;">Strict Source Grounding Guaranteed</h2>
+          <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+            Traditional LLM prompts hallucinate facts when quizzing complex academic subjects. QuizGen AI enforces strict token attribution and citation mapping so students and educators can test with total confidence.
+          </p>
+          <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <div class="card" style="flex: 1; min-width: 200px; padding: 1.2rem;">
+              <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">20 MB</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">Max PDF Upload</div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 200px; padding: 1.2rem;">
+              <div style="font-size: 1.5rem; font-weight: 800; color: var(--secondary);">100%</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">Source Citations</div>
+            </div>
+            <div class="card" style="flex: 1; min-width: 200px; padding: 1.2rem;">
+              <div style="font-size: 1.5rem; font-weight: 800; color: var(--accent);">3 Modes</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">MCQ, T/F, Short Ans</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div class="brand-logo">
+          <div class="brand-logo-icon" style="width: 30px; height: 30px; font-size: 1rem;">⚡</div>
+          <span>QuizGen AI</span>
+        </div>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          &copy; 2026 QuizGen AI. Turn Your Study Material Into Smart Quizzes.
+        </p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

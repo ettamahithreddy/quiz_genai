@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Results — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <div class="nav-actions">
+          <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
+          <a href="generate.html" class="btn btn-primary btn-sm">New Quiz</a>
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 2.5rem 0 4rem;">
+      <div class="container container-narrow">
+        <!-- Results Score Hero Card -->
+        <div class="card" style="text-align: center; padding: 2.5rem; margin-bottom: 2rem; background: linear-gradient(180deg, #ffffff 0%, #fafbfd 100%);">
+          <div style="font-size: 2.5rem; margin-bottom: 0.4rem;" id="resultEmoji">🎉</div>
+          <h1 style="font-size: 2rem; margin-bottom: 0.2rem;" id="resultTitle">Quiz Completed!</h1>
+          <p id="resultSubtitle" style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.5rem;">
+            Here is your detailed performance breakdown.
+          </p>
+
+          <!-- Accuracy Gauge -->
+          <div style="display: inline-flex; align-items: baseline; justify-content: center; gap: 0.2rem; background: var(--primary-light); padding: 0.8rem 2.2rem; border-radius: var(--radius-xl); margin-bottom: 2rem;">
+            <span id="scorePercentage" style="font-size: 3.5rem; font-weight: 800; color: var(--primary); line-height: 1;">0</span>
+            <span style="font-size: 1.6rem; font-weight: 700; color: var(--primary);">%</span>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="grid-4" style="margin-bottom: 2rem; text-align: center;">
+            <div style="background: var(--success-light); padding: 1rem; border-radius: var(--radius-md);">
+              <div id="statCorrect" style="font-size: 1.6rem; font-weight: 800; color: var(--success-text);">0</div>
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--success-text);">Correct</div>
+            </div>
+
+            <div style="background: var(--danger-light); padding: 1rem; border-radius: var(--radius-md);">
+              <div id="statIncorrect" style="font-size: 1.6rem; font-weight: 800; color: var(--danger-text);">0</div>
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--danger-text);">Incorrect</div>
+            </div>
+
+            <div style="background: var(--bg-alt); padding: 1rem; border-radius: var(--radius-md);">
+              <div id="statTotal" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0</div>
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Total Questions</div>
+            </div>
+
+            <div style="background: var(--bg-alt); padding: 1rem; border-radius: var(--radius-md);">
+              <div id="statTime" style="font-size: 1.6rem; font-weight: 800; color: var(--text-main);">0s</div>
+              <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-muted);">Time Elapsed</div>
+            </div>
+          </div>
+
+          <!-- Result Actions -->
+          <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+            <a href="#reviewSection" class="btn btn-secondary">
+              🔍 Review Answers
+            </a>
+            <a href="generate.html" class="btn btn-primary">
+              ⚡ Generate Another Quiz
+            </a>
+            <button id="practiceWeakBtn" class="btn btn-outline-primary">
+              🎯 Practice Weak Topics
+            </button>
+          </div>
+        </div>
+
+        <!-- Detailed Answer Review Section -->
+        <div id="reviewSection">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="font-size: 1.5rem;">Detailed Answer Review &amp; Citations</h2>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Grounded RAG Sources</span>
+          </div>
+
+          <div id="questionsReviewContainer" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Rendered by results.js -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Celebration Confetti Blast Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>

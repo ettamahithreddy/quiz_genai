@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-menu">
+          <!-- Populated by auth.js -->
+        </ul>
+        <div class="nav-actions">
+          <!-- Populated by auth.js -->
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 2.5rem 0;">
+      <div class="container">
+        <!-- Welcome Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+          <div>
+            <h1 id="welcomeGreeting" style="font-size: 2rem; margin-bottom: 0.25rem;">Student Dashboard</h1>
+            <p style="color: var(--text-muted);">Track your accuracy, grounded study materials, and topic mastery.</p>
+          </div>
+          <div style="display: flex; gap: 0.8rem;">
+            <a href="generate.html" class="btn btn-primary">⚡ Generate New Quiz</a>
+            <a href="flashcards.html" class="btn btn-secondary">🗂️ Study Flashcards</a>
+          </div>
+        </div>
+
+        <!-- Metrics Cards Grid -->
+        <div class="grid-4" style="margin-bottom: 2.5rem;">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Total Quizzes</span>
+              <span style="font-size: 1.2rem;">📝</span>
+            </div>
+            <div id="statTotalQuizzes" style="font-size: 2rem; font-weight: 800; color: var(--text-main);">0</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Generated from study notes</div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Average Score</span>
+              <span style="font-size: 1.2rem;">🎯</span>
+            </div>
+            <div id="statAvgScore" style="font-size: 2rem; font-weight: 800; color: var(--primary);">0%</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Overall mastery rate</div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Questions Answered</span>
+              <span style="font-size: 1.2rem;">💡</span>
+            </div>
+            <div id="statQuestionsAnswered" style="font-size: 2rem; font-weight: 800; color: var(--secondary);">0</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Tested questions</div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+              <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase;">Best Score</span>
+              <span style="font-size: 1.2rem;">🏆</span>
+            </div>
+            <div id="statBestScore" style="font-size: 2rem; font-weight: 800; color: var(--success);">0%</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Highest accuracy achieved</div>
+          </div>
+        </div>
+
+        <!-- Performance Chart & Weak Topics Section -->
+        <div class="grid-3" style="margin-bottom: 2.5rem; align-items: start;">
+          <!-- Chart Column (2 spans) -->
+          <div class="card" style="grid-column: span 2;">
+            <div class="card-header">
+              <h3>Score Progression</h3>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Recent Quiz Accuracy (%)</span>
+            </div>
+            <div style="height: 280px; position: relative;">
+              <canvas id="scoreChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Weak Topics / Adaptive Recommendations -->
+          <div class="card">
+            <div class="card-header">
+              <h3>Topic Mastery</h3>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--warning); background: var(--warning-light); padding: 0.2rem 0.5rem; border-radius: var(--radius-sm);">Adaptive</span>
+            </div>
+            <div id="weakTopicsList" style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <p style="color: var(--text-muted); font-size: 0.9rem;">Take your first quiz to identify areas for improvement.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Quizzes Table/Cards -->
+        <div class="card">
+          <div class="card-header">
+            <h3>Recent Quizzes</h3>
+          </div>
+          <div id="recentQuizzesContainer">
+            <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📚</div>
+              <p style="font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem;">No quizzes yet</p>
+              <p style="font-size: 0.9rem; margin-bottom: 1.2rem;">Upload your study material and generate your first source-grounded quiz.</p>
+              <a href="generate.html" class="btn btn-primary btn-sm">Create First Quiz</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

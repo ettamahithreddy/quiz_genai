@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Your Quiz — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-menu">
+          <!-- Populated by auth.js -->
+        </ul>
+        <div class="nav-actions">
+          <!-- Populated by auth.js -->
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 2.5rem 0;">
+      <div class="container container-narrow">
+        <!-- Page Title -->
+        <div style="text-align: center; margin-bottom: 2.2rem;">
+          <h1 style="font-size: 2.2rem; margin-bottom: 0.4rem;">Create Your Quiz</h1>
+          <p style="color: var(--text-muted); font-size: 1.05rem;">
+            Choose your study material and let AI create a personalized, strictly source-grounded quiz.
+          </p>
+        </div>
+
+        <!-- Main Form Card -->
+        <div class="card" style="padding: 2rem;">
+          <!-- Input Mode Tabs -->
+          <div class="input-tabs">
+            <button type="button" class="input-tab-btn active" data-tab="tab-pdf">
+              📄 Upload PDF
+            </button>
+            <button type="button" class="input-tab-btn" data-tab="tab-topic">
+              🔍 Enter Topic
+            </button>
+            <button type="button" class="input-tab-btn" data-tab="tab-notes">
+              📝 Paste Notes
+            </button>
+          </div>
+
+          <form id="quizGeneratorForm">
+            <!-- TAB 1: PDF UPLOAD -->
+            <div id="tab-pdf" class="tab-content-panel">
+              <div class="dropzone" id="dropzone">
+                <input type="file" id="pdfFileInput" accept=".pdf,.txt,.md" style="display: none;">
+                <div class="dropzone-icon">📄</div>
+                <h3 style="font-size: 1.15rem; margin-bottom: 0.3rem;">Upload Study Material</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+                  Drag &amp; drop your PDF here, or click to browse files
+                </p>
+                <button type="button" id="browseBtn" class="btn btn-secondary btn-sm">
+                  Browse Files
+                </button>
+                <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.8rem;">
+                  Supported: PDF, TXT (Maximum: 20 MB)
+                </div>
+              </div>
+
+              <!-- Selected File Card -->
+              <div id="filePreview" class="file-preview-card" style="display: none;">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                  <span style="font-size: 1.4rem; color: var(--success);">✓</span>
+                  <div>
+                    <div id="previewFileName" style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">filename.pdf</div>
+                    <div id="previewFileSize" style="font-size: 0.8rem; color: var(--text-muted);">2.4 MB</div>
+                  </div>
+                </div>
+                <button type="button" id="removeFileBtn" class="btn btn-secondary btn-sm" style="color: var(--danger);">
+                  Remove
+                </button>
+              </div>
+
+              <!-- Optional Topic within PDF -->
+              <div class="form-group" style="margin-top: 1.5rem;">
+                <label for="pdfSpecificTopic" class="form-label">
+                  Specific Topic within Document <span style="font-weight: normal; color: var(--text-muted);">(Optional)</span>
+                </label>
+                <input type="text" id="pdfSpecificTopic" class="form-control" placeholder="e.g. Supervised Learning, Sorting Algorithms">
+                <small style="color: var(--text-muted); font-size: 0.8rem;">
+                  If specified, RAG will retrieve content only for this topic from your uploaded PDF.
+                </small>
+              </div>
+            </div>
+
+            <!-- TAB 2: TOPIC INPUT -->
+            <div id="tab-topic" class="tab-content-panel" style="display: none;">
+              <div class="form-group">
+                <label for="topicInput" class="form-label">Enter Subject / Topic Name</label>
+                <input type="text" id="topicInput" class="form-control" placeholder="e.g. Machine Learning, Python Loops, Database Management Systems">
+                <div style="margin-top: 0.75rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <span style="font-size: 0.8rem; color: var(--text-muted); align-self: center;">Popular:</span>
+                  <button type="button" class="btn btn-secondary btn-sm sample-topic-btn">Machine Learning</button>
+                  <button type="button" class="btn btn-secondary btn-sm sample-topic-btn">Python Loops</button>
+                  <button type="button" class="btn btn-secondary btn-sm sample-topic-btn">Data Structures</button>
+                  <button type="button" class="btn btn-secondary btn-sm sample-topic-btn">Operating Systems</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: ARTICLE / NOTES INPUT -->
+            <div id="tab-notes" class="tab-content-panel" style="display: none;">
+              <div class="form-group">
+                <label for="notesTitleInput" class="form-label">Material Title <span style="font-weight: normal; color: var(--text-muted);">(Optional)</span></label>
+                <input type="text" id="notesTitleInput" class="form-control" placeholder="e.g. Chapter 4 Lecture Notes">
+              </div>
+              <div class="form-group">
+                <label for="notesTextInput" class="form-label">Paste Article or Study Material</label>
+                <textarea id="notesTextInput" class="form-control" style="min-height: 180px;" placeholder="Paste your study text, textbook chapter, or lecture notes here..."></textarea>
+                <div style="display: flex; justify-content: flex-end; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;">
+                  <span id="charCounter">0</span>&nbsp;characters
+                </div>
+              </div>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 2rem 0;">
+
+            <!-- QUIZ SETTINGS -->
+            <h3 style="font-size: 1.15rem; margin-bottom: 1.2rem;">Quiz Settings</h3>
+
+            <div class="grid-2" style="margin-bottom: 1.5rem;">
+              <!-- Number of Questions -->
+              <div class="form-group">
+                <label for="numQuestionsInput" class="form-label">Number of Questions</label>
+                <input type="number" id="numQuestionsInput" class="form-control" placeholder="Enter number of questions" min="1" max="100" value="10">
+              </div>
+
+              <!-- Difficulty -->
+              <div class="form-group">
+                <label class="form-label">Difficulty Level</label>
+                <select id="difficultySelect" class="form-control">
+                  <option value="easy">Easy</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="difficult">Difficult</option>
+                  <option value="mixed">Mixed</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Question Types -->
+            <div class="form-group" style="margin-bottom: 2rem;">
+              <label class="form-label">Question Types <span style="font-weight: normal; color: var(--text-muted);">(Select at least one)</span></label>
+              <div style="display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 0.4rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem;">
+                  <input type="checkbox" name="qType" value="mcq" checked style="width: 18px; height: 18px; accent-color: var(--primary);">
+                  Multiple Choice (MCQ)
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem;">
+                  <input type="checkbox" name="qType" value="true_false" checked style="width: 18px; height: 18px; accent-color: var(--primary);">
+                  True / False
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.95rem;">
+                  <input type="checkbox" name="qType" value="short_answer" checked style="width: 18px; height: 18px; accent-color: var(--primary);">
+                  Short Answer
+                </label>
+              </div>
+            </div>
+
+            <!-- Generate Button -->
+            <button type="submit" id="generateQuizBtn" class="btn btn-primary btn-block btn-lg">
+              ✨ Generate Quiz
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Clean Quiz Generation Loading Modal -->
+    <div id="aiLoaderModal" class="ai-loader-modal">
+      <div class="ai-loader-content" style="text-align: center; padding: 2.5rem 2rem; max-width: 360px;">
+        <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text-main); margin-bottom: 1.2rem;">Generating Quiz...</h2>
+        <div class="clean-spinner"></div>
+      </div>
+    </div>
+
+    <!-- Insufficient Content Modal -->
+    <div id="insufficientModal" class="ai-loader-modal">
+      <div class="ai-loader-content" style="text-align: center;">
+        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚠️</div>
+        <h2 id="insufficientTitle" style="font-size: 1.4rem; margin-bottom: 0.6rem;">Limited Source Information</h2>
+        <p id="insufficientMessage" style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.8rem;">
+          The supplied material does not contain enough information for the requested number of source-grounded questions.
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+          <button type="button" id="confirmPartialBtn" class="btn btn-primary">
+            Generate Available Questions
+          </button>
+          <button type="button" id="cancelPartialBtn" class="btn btn-secondary">
+            Adjust Settings
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/generate.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Study Materials — QuizGen AI</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body>
+  <div class="app-container">
+    <header class="navbar">
+      <div class="container nav-container">
+        <a href="dashboard.html" class="brand-logo">
+          <div class="brand-logo-icon">⚡</div>
+          <span>QuizGen AI</span>
+        </a>
+        <button class="mobile-toggle" aria-label="Toggle navigation">☰</button>
+        <ul class="nav-menu">
+          <!-- Populated by auth.js -->
+        </ul>
+        <div class="nav-actions">
+          <!-- Populated by auth.js -->
+        </div>
+      </div>
+    </header>
+
+    <main style="padding: 2.5rem 0 4rem;">
+      <div class="container">
+        <!-- Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 2rem;">
+          <div>
+            <h1 style="font-size: 2rem; margin-bottom: 0.25rem;">My Study Materials</h1>
+            <p style="color: var(--text-muted);">Manage your uploaded PDFs, textbooks, and lecture notes indexed for RAG generation.</p>
+          </div>
+          <div>
+            <a href="generate.html" class="btn btn-primary">➕ Upload &amp; Generate</a>
+          </div>
+        </div>
+
+        <!-- Materials Grid / List -->
+        <div id="materialsContainer">
+          <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📂</div>
+            <p style="font-size: 1.1rem; font-weight: 600;">Loading study materials...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Material Details / Chunks Modal -->
+    <div id="materialModal" class="ai-loader-modal">
+      <div class="ai-loader-content" style="max-width: 680px; max-height: 85vh; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.8rem;">
+          <h3 id="modalMatTitle" style="font-size: 1.3rem;">Material Details</h3>
+          <button type="button" id="closeMatModalBtn" class="btn btn-secondary btn-sm">✕</button>
+        </div>
+
+        <div style="margin-bottom: 1.2rem; font-size: 0.9rem; color: var(--text-muted); display: flex; gap: 1rem;" id="modalMatStats">
+          <!-- Stats -->
+        </div>
+
+        <h4 style="font-size: 1rem; margin-bottom: 0.6rem;">Semantic RAG Chunks Preview</h4>
+        <div id="modalChunksList" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; padding-right: 0.5rem;">
+          <!-- Chunks list -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/materials.js"></script>
+</body>
+</html>
