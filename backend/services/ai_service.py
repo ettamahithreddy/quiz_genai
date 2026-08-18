@@ -584,7 +584,7 @@ def generate_topic_flashcards_with_ai(topic: str, num_cards: int = 10) -> Dict[s
 
 def call_gemini_api(user_prompt: str, system_prompt: str, api_key: str) -> Optional[Dict[str, Any]]:
     """Call Google Gemini API via REST endpoint with JSON mode."""
-    models = ["gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"]
+    models = ["gemini-3.5-flash-lite"]
     
     for model in models:
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
