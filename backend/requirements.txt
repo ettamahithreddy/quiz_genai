@@ -11,3 +11,4 @@ numpy==1.26.4
 requests==2.31.0
 google-genai
 mongomock==4.1.2
+gunicorn==22.0.0
