@@ -19,6 +19,7 @@ def get_db():
     Returns the MongoDB database instance.
     Connects to MongoDB Atlas or configured MongoDB URI.
     """
+    client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
     global _mongo_client, _db_instance, _is_mock
 
     if _db_instance is not None:
